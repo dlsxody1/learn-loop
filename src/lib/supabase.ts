@@ -1,11 +1,13 @@
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 
 const url = import.meta.env.VITE_SUPABASE_URL as string | undefined;
-const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined;
+const publishableKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as
+  | string
+  | undefined;
 
 /** 환경변수가 채워졌을 때만 Supabase 클라이언트를 만든다. 아니면 null → 로컬 폴백. */
 export const supabase: SupabaseClient | null =
-  url && anonKey ? createClient(url, anonKey) : null;
+  url && publishableKey ? createClient(url, publishableKey) : null;
 
 export const isSupabaseEnabled = supabase !== null;
 

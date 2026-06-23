@@ -22,8 +22,8 @@ export function ArchiveView({ solutions, onDelete }: ArchiveViewProps) {
   );
 
   return (
-    <section className="mx-auto max-w-[1080px] px-5 py-8">
-      <h1 className="text-[34px] font-semibold leading-[1.1] tracking-[-0.374px]">
+    <section className="mx-auto max-w-[1080px] px-4 py-7 sm:px-5 sm:py-8">
+      <h1 className="text-[28px] sm:text-[34px] font-semibold leading-[1.1] tracking-[-0.374px]">
         풀이 기록
       </h1>
       <p className="mt-2 text-[17px] leading-relaxed text-ink-48">

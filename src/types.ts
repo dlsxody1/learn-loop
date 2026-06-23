@@ -52,3 +52,51 @@ export interface Solution {
 
 /** 커리큘럼 체크리스트 항목 완료 상태. key = `${week}:${index}`. */
 export type ChecklistState = Record<string, boolean>;
+
+// ── 퀴즈 (아침/저녁 분리 + 점프 학습) ─────────────────────────
+export type QuizSession = "morning" | "evening";
+
+export type QuizTopic =
+  | "javascript"
+  | "typescript"
+  | "react"
+  | "web"
+  | "css"
+  | "browser"
+  | "perf";
+
+export interface QuizQuestion {
+  id: string; // "p1-m-001" (pack1, morning, 001)
+  packId: string; // "pack-1"
+  topic: QuizTopic;
+  session: QuizSession;
+  difficulty: Difficulty;
+  question: string;
+  choices: string[]; // 4지선다
+  answerIndex: number;
+  explanation: string;
+}
+
+export interface QuizPack {
+  id: string; // "pack-1"
+  order: number; // 1, 2, 3...
+  title: string; // "JS/React 기초"
+  description: string;
+  /** 기본 첫 팩만 true. 확인 테스트 통과 시 다음 팩 unlock. */
+  unlocked: boolean;
+}
+
+export interface QuizAttempt {
+  id: string;
+  questionId: string;
+  packId: string;
+  session: QuizSession;
+  correct: boolean;
+  attemptedAt: string; // ISO
+}
+
+export interface PackCompletion {
+  packId: string;
+  finalTestScore: number; // 0~100
+  passedAt: string; // ISO
+}

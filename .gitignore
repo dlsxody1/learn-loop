@@ -10,3 +10,9 @@ dist-ssr
 .vite
 *.tsbuildinfo
 
+.claude/setting.json
+
+# Claude Code / agent tooling
+.agents/
+.mcp.json
+skills-lock.json

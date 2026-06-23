@@ -56,6 +56,12 @@
     line-height: 1.47;
     letter-spacing: -0.374px;
   }
+  /* 모바일은 16px로 살짝 줄여 좁은 화면에서 줄바꿈을 줄인다 */
+  @media (max-width: 640px) {
+    body {
+      font-size: 16px;
+    }
+  }
   /* Display sizes use negative letter-spacing; weight 500 is deliberately absent */
   h1, h2, h3 {
     letter-spacing: -0.28px;

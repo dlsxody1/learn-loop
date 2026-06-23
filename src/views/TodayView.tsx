@@ -19,13 +19,13 @@ export function TodayView({ week, onWeekChange, solutions, onSave }: TodayViewPr
   const byProblemId = new Map(solutions.map((s) => [s.problemId, s]));
 
   return (
-    <section className="mx-auto max-w-[1080px] px-5 py-8">
+    <section className="mx-auto max-w-[1080px] px-4 py-7 sm:px-5 sm:py-8">
       <div className="mb-6 flex items-center justify-between">
         <div>
           <p className="text-[14px] tracking-[-0.224px] text-action">
             {phase?.name} · Week {week} / {TOTAL_WEEKS}
           </p>
-          <h1 className="mt-1 text-[34px] font-semibold leading-[1.1] tracking-[-0.374px]">
+          <h1 className="mt-1 text-[28px] sm:text-[34px] font-semibold leading-[1.1] tracking-[-0.374px]">
             {meta?.title}
           </h1>
           <p className="mt-2 max-w-[640px] text-[17px] leading-relaxed text-ink-48">

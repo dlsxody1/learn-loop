@@ -1,28 +1,28 @@
 import { cn } from "@/lib/cn";
+import { TABS, type View } from "./nav";
 
-export type View = "today" | "curriculum" | "archive" | "progress";
-
-const TABS: { id: View; label: string }[] = [
-  { id: "today", label: "오늘" },
-  { id: "curriculum", label: "커리큘럼" },
-  { id: "archive", label: "기록" },
-  { id: "progress", label: "진행" },
-];
+export type { View };
 
 interface TopNavProps {
   view: View;
   onChange: (v: View) => void;
 }
 
-/** 상단 고정 내비. parchment 80% + blur(20px) 백드롭 (Apple sub-nav 규칙). */
+/**
+ * 상단 고정 내비. parchment 80% + blur(20px) 백드롭 (Apple sub-nav 규칙).
+ * 모바일에서는 탭을 숨기고 로고만 보이며, 탭 전환은 BottomTabBar가 담당한다.
+ */
 export function TopNav({ view, onChange }: TopNavProps) {
   return (
     <header className="blur-nav sticky top-0 z-10 border-b border-hairline">
-      <nav className="mx-auto flex max-w-[1080px] items-center justify-between px-5 py-3">
-        <span className="text-[17px] font-semibold tracking-[-0.374px]">
-          LINE Prep
+      <nav className="mx-auto flex max-w-[1080px] items-center justify-between px-4 py-3 sm:px-5">
+        <span className="flex items-center gap-1.5 text-[17px] font-semibold tracking-[-0.374px]">
+          <span aria-hidden="true" className="text-action">
+            ↻
+          </span>
+          LearnLoop
         </span>
-        <div className="flex items-center gap-1">
+        <div className="hidden items-center gap-1 sm:flex">
           {TABS.map((t) => (
             <button
               key={t.id}

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="LearnLoop">
+  <rect width="512" height="512" rx="114" fill="#0066cc"/>
+  <path
+    d="M168 256c0-37 30-67 67-67 20 0 37 9 49 23l72 84c8 9 19 15 32 15 26 0 47-21 47-47s-21-47-47-47c-13 0-25 6-33 15"
+    fill="none" stroke="#ffffff" stroke-width="34" stroke-linecap="round" stroke-linejoin="round"/>
+  <path
+    d="M344 256c0 37-30 67-67 67-20 0-37-9-49-23l-72-84c-8-9-19-15-32-15-26 0-47 21-47 47s21 47 47 47c13 0 25-6 33-15"
+    fill="none" stroke="#ffffff" stroke-width="34" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

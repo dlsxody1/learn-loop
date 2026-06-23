@@ -1,3 +1,4 @@
+import { useState } from "react";
 import type { ChecklistState, Solution } from "@/types";
 import {
   curriculumProgress,
@@ -7,7 +8,15 @@ import {
 } from "@/lib/progress";
 import { problems } from "@/data/problems";
 import { Card } from "@/components/ui/Card";
+import { Button } from "@/components/ui/Button";
 import { ProgressBar } from "@/components/ui/ProgressBar";
+import { downloadAlarmIcs } from "@/lib/ics";
+import {
+  enableNotifications,
+  isNotifyEnabled,
+  notifyPermission,
+  setNotifyEnabled,
+} from "@/lib/notify";
 
 interface ProgressViewProps {
   solutions: Solution[];
@@ -28,8 +37,8 @@ export function ProgressView({ solutions, checklist }: ProgressViewProps) {
   const feTotal = problems.filter((p) => p.category === "fe-concept").length;
 
   return (
-    <section className="mx-auto max-w-[1080px] px-5 py-8">
-      <h1 className="text-[34px] font-semibold leading-[1.1] tracking-[-0.374px]">
+    <section className="mx-auto max-w-[1080px] px-4 py-7 sm:px-5 sm:py-8">
+      <h1 className="text-[28px] sm:text-[34px] font-semibold leading-[1.1] tracking-[-0.374px]">
         진행 현황
       </h1>
 
@@ -61,7 +70,81 @@ export function ProgressView({ solutions, checklist }: ProgressViewProps) {
           />
         </Card>
       </div>
+
+      <AlarmCard />
     </section>
+  );
+}
+
+/** 매일 학습 알람 설정 — 캘린더(.ics) + 인앱 알림 토글. */
+function AlarmCard() {
+  const [enabled, setEnabled] = useState<boolean>(() => isNotifyEnabled());
+  const [status, setStatus] = useState<string>("");
+
+  const toggle = async () => {
+    if (enabled) {
+      setNotifyEnabled(false);
+      setEnabled(false);
+      setStatus("");
+      return;
+    }
+    const perm = await enableNotifications();
+    if (perm === "granted") {
+      setEnabled(true);
+      setStatus("인앱 알림이 켜졌습니다 (앱이 열려있을 때 알려드려요).");
+    } else if (perm === "unsupported") {
+      setStatus("이 브라우저는 알림을 지원하지 않습니다.");
+    } else {
+      setStatus("브라우저 알림 권한이 거부되어 켤 수 없습니다.");
+    }
+  };
+
+  const perm = notifyPermission();
+
+  return (
+    <Card className="mt-5 p-6">
+      <h2 className="text-[19px] font-semibold tracking-[-0.3px]">
+        매일 학습 알람
+      </h2>
+      <p className="mt-1 text-[14px] leading-relaxed text-ink-48">
+        아침 09:00 · 저녁 22:00. 휴대폰 캘린더에 추가하면 잠금화면 알림으로,
+        인앱 알림은 앱이 열려있을 때 보조로 알려줍니다.
+      </p>
+
+      <div className="mt-4 flex flex-col gap-3">
+        <div className="flex items-center justify-between gap-3">
+          <div>
+            <p className="text-[15px] font-medium">휴대폰 캘린더에 추가</p>
+            <p className="text-[13px] text-ink-48">매일 반복(.ics) 다운로드</p>
+          </div>
+          <Button variant="secondary" onClick={downloadAlarmIcs}>
+            .ics 받기
+          </Button>
+        </div>
+
+        <div className="flex items-center justify-between gap-3 border-t border-divider pt-3">
+          <div>
+            <p className="text-[15px] font-medium">인앱 알림 사용</p>
+            <p className="text-[13px] text-ink-48">
+              {perm === "unsupported"
+                ? "미지원 브라우저"
+                : enabled
+                  ? "켜짐"
+                  : "꺼짐"}
+            </p>
+          </div>
+          <Button
+            variant={enabled ? "secondary" : "primary"}
+            onClick={toggle}
+            disabled={perm === "unsupported"}
+          >
+            {enabled ? "끄기" : "켜기"}
+          </Button>
+        </div>
+      </div>
+
+      {status && <p className="mt-3 text-[13px] text-action">{status}</p>}
+    </Card>
   );
 }
 
