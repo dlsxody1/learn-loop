@@ -35,6 +35,8 @@ export type { Notifier, NotifyPermission } from "./adapters/notifier";
 // 퀴즈 도메인
 export type { QuizRepo } from "./quiz/quizRepo";
 export { createKvQuizRepo } from "./quiz/quizRepo";
+export type { SupabaseLike } from "./quiz/supabaseQuizRepo";
+export { createSupabaseQuizRepo } from "./quiz/supabaseQuizRepo";
 export {
   useQuiz,
   PASS_THRESHOLD,
