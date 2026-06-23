@@ -10,7 +10,7 @@ import { ProgressView } from "@/views/ProgressView";
 import { useSolutions } from "@/hooks/useSolutions";
 import { useChecklist } from "@/hooks/useChecklist";
 import { useStartDate } from "@/hooks/useStartDate";
-import { currentWeekFrom } from "@/lib/progress";
+import { currentWeekFrom } from "@learnloop/core";
 import { isSupabaseEnabled } from "@/lib/supabase";
 import { maybeNotify } from "@/lib/notify";
 

@@ -1,4 +1,4 @@
-import type { QuizQuestion } from "@/types";
+import type { QuizQuestion } from "../../types";
 
 export const pack1Questions: QuizQuestion[] = [
   {

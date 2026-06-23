@@ -1,4 +1,4 @@
-import { isEveningWindow, isMorningWindow } from "./session";
+import { isEveningWindow, isMorningWindow } from "@learnloop/core";
 
 /**
  * 인앱 알림(보조). 서비스워커 백그라운드 타이머는 신뢰도가 낮아,

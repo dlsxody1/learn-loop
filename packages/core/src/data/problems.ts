@@ -1,4 +1,4 @@
-import type { Problem } from "@/types";
+import type { Problem } from "../types";
 
 /**
  * 주차별 문제 은행. 매주 알고리즘 1 + 프론트엔드 개념 1을 기본으로 한다.

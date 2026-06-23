@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import type { Solution } from "@/types";
+import type { Solution } from "@learnloop/core";
 import { storage } from "@/lib/storage";
 
 /** 풀이 목록 조회/저장/삭제. 데이터 관심사만 담당. */

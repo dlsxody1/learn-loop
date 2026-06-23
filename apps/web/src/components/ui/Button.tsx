@@ -1,5 +1,5 @@
 import type { ButtonHTMLAttributes, ReactNode } from "react";
-import { cn } from "@/lib/cn";
+import { cn } from "@learnloop/core";
 
 type Variant = "primary" | "secondary" | "utility" | "ghost";
 

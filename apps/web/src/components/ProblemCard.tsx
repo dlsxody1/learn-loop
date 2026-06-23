@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { Problem, Solution } from "@/types";
+import type { Problem, Solution } from "@learnloop/core";
 import { Card } from "./ui/Card";
 import { Button } from "./ui/Button";
 import { CategoryBadge, DifficultyBadge, Tag } from "./ui/Badge";

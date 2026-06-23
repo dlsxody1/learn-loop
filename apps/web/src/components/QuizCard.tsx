@@ -1,6 +1,6 @@
 import { useState } from "react";
-import type { QuizQuestion } from "@/types";
-import { cn } from "@/lib/cn";
+import type { QuizQuestion } from "@learnloop/core";
+import { cn } from "@learnloop/core";
 import { Card } from "./ui/Card";
 import { Button } from "./ui/Button";
 

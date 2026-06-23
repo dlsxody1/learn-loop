@@ -1,4 +1,4 @@
-import type { QuizPack } from "@/types";
+import type { QuizPack } from "../../types";
 
 /**
  * 학습 묶음(pack) 메타 정보. 점프 학습: 한 묶음을 한 달간 풀고

@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import type { QuizQuestion } from "@/types";
+import type { QuizQuestion } from "@learnloop/core";
 import { QuizCard } from "@/components/QuizCard";
 import { QuizResult } from "@/components/QuizResult";
 import { PASS_THRESHOLD } from "@/hooks/useQuiz";

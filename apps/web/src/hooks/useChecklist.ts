@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import type { ChecklistState } from "@/types";
+import type { ChecklistState } from "@learnloop/core";
 import { storage } from "@/lib/storage";
 
 /** 커리큘럼 체크리스트 상태 조회/토글. 데이터 관심사만 담당. */

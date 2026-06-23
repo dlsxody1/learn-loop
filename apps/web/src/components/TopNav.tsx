@@ -1,4 +1,4 @@
-import { cn } from "@/lib/cn";
+import { cn } from "@learnloop/core";
 import { TABS, type View } from "./nav";
 
 export type { View };

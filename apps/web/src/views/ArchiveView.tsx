@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
-import type { ProblemCategory, Solution } from "@/types";
-import { cn } from "@/lib/cn";
+import type { ProblemCategory, Solution } from "@learnloop/core";
+import { cn } from "@learnloop/core";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { CategoryBadge } from "@/components/ui/Badge";

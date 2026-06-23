@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { Problem, Solution } from "@/types";
+import type { Problem, Solution } from "@learnloop/core";
 import { Button } from "./ui/Button";
 
 interface SolutionEditorProps {

@@ -1,7 +1,7 @@
 import { useState } from "react";
-import type { ChecklistState } from "@/types";
-import { phases, weeks } from "@/data/curriculum";
-import { cn } from "@/lib/cn";
+import type { ChecklistState } from "@learnloop/core";
+import { phases, weeks } from "@learnloop/core";
+import { cn } from "@learnloop/core";
 import { Card } from "@/components/ui/Card";
 
 interface CurriculumViewProps {

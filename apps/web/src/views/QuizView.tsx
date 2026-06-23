@@ -1,7 +1,7 @@
 import { useState } from "react";
-import type { QuizQuestion, QuizSession } from "@/types";
+import type { QuizQuestion, QuizSession } from "@learnloop/core";
 import { useQuiz } from "@/hooks/useQuiz";
-import { suggestedSession, SESSION_LABEL } from "@/lib/session";
+import { suggestedSession, SESSION_LABEL } from "@learnloop/core";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { ProgressBar } from "@/components/ui/ProgressBar";

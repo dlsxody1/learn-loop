@@ -1,4 +1,4 @@
-import type { CurriculumPhase, CurriculumWeek } from "@/types";
+import type { CurriculumPhase, CurriculumWeek } from "../types";
 
 export const phases: CurriculumPhase[] = [
   { id: "p0", name: "Phase 0", weeks: [1, 2, 3, 4], theme: "FE 기초 심화 — JS/TS 내부 동작 + 코드 품질" },

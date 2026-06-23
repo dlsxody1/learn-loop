@@ -1,4 +1,4 @@
-import type { QuizSession } from "@/types";
+import type { QuizSession } from "../types";
 
 /**
  * 현재 시각 기준 권장 세션을 반환한다.

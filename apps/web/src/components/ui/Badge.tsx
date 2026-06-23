@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
-import { cn } from "@/lib/cn";
-import type { Difficulty, ProblemCategory } from "@/types";
+import { cn } from "@learnloop/core";
+import type { Difficulty, ProblemCategory } from "@learnloop/core";
 
 export function CategoryBadge({ category }: { category: ProblemCategory }) {
   const isAlgo = category === "algorithm";

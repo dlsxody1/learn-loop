@@ -1,16 +1,16 @@
 import { useState } from "react";
-import type { ChecklistState, Solution } from "@/types";
+import type { ChecklistState, Solution } from "@learnloop/core";
 import {
   curriculumProgress,
   currentStreak,
   doneChecklistItems,
   totalChecklistItems,
-} from "@/lib/progress";
-import { problems } from "@/data/problems";
+} from "@learnloop/core";
+import { problems } from "@learnloop/core";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { ProgressBar } from "@/components/ui/ProgressBar";
-import { downloadAlarmIcs } from "@/lib/ics";
+import { downloadAlarmIcs } from "@/lib/icsDownload";
 import {
   enableNotifications,
   isNotifyEnabled,

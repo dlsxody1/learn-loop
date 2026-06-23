@@ -1,5 +1,5 @@
-import type { ChecklistState, Solution } from "@/types";
-import { weeks } from "@/data/curriculum";
+import type { ChecklistState, Solution } from "../types";
+import { weeks } from "../data/curriculum";
 
 export const TOTAL_WEEKS = 24;
 const MS_PER_DAY = 86_400_000;

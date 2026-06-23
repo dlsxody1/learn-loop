@@ -1,4 +1,4 @@
-import type { ChecklistState, Solution } from "@/types";
+import type { ChecklistState, Solution } from "@learnloop/core";
 import { getDeviceId, supabase } from "./supabase";
 
 /**

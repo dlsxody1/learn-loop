@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
-import type { QuizQuestion, QuizSession } from "@/types";
-import { SESSION_LABEL } from "@/lib/session";
+import type { QuizQuestion, QuizSession } from "@learnloop/core";
+import { SESSION_LABEL } from "@learnloop/core";
 import { QuizCard } from "@/components/QuizCard";
 import { QuizResult } from "@/components/QuizResult";
 

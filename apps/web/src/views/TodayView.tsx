@@ -1,7 +1,7 @@
-import type { Solution } from "@/types";
-import { problemsOfWeek } from "@/data/problems";
-import { phaseOfWeek, weeks } from "@/data/curriculum";
-import { TOTAL_WEEKS } from "@/lib/progress";
+import type { Solution } from "@learnloop/core";
+import { problemsOfWeek } from "@learnloop/core";
+import { phaseOfWeek, weeks } from "@learnloop/core";
+import { TOTAL_WEEKS } from "@learnloop/core";
 import { ProblemCard } from "@/components/ProblemCard";
 import { Button } from "@/components/ui/Button";
 

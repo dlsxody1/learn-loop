@@ -1,4 +1,4 @@
-import type { QuizQuestion } from "@/types";
+import type { QuizQuestion } from "../../types";
 
 /**
  * pack-2 — TS / 성능 / 브라우저 심화.
