@@ -16,7 +16,11 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "baseUrl": ".",
-    "paths": { "@/*": ["./src/*"] }
+    "paths": {
+      "@/*": ["./src/*"],
+      "@learnloop/core": ["../../packages/core/src/index.ts"],
+      "@learnloop/core/*": ["../../packages/core/src/*"]
+    }
   },
-  "include": ["src"]
+  "include": ["src", "../../packages/core/src"]
 }
