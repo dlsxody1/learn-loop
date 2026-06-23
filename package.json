@@ -12,5 +12,11 @@
     "dev:mobile": "pnpm --filter @learnloop/mobile start",
     "build:web": "pnpm --filter @learnloop/web build",
     "typecheck": "pnpm -r typecheck"
+  },
+  "pnpm": {
+    "overrides": {
+      "react": "19.2.3",
+      "react-dom": "19.2.3"
+    }
   }
 }
