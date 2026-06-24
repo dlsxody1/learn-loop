@@ -1,5 +1,9 @@
-import { useState } from "react";
-import type { ChecklistState, Solution } from "@learnloop/core";
+import { useEffect, useState } from "react";
+import type {
+  CalendarConnectStatus,
+  ChecklistState,
+  Solution,
+} from "@learnloop/core";
 import {
   curriculumProgress,
   currentStreak,
@@ -17,6 +21,10 @@ import {
   notifyPermission,
   setNotifyEnabled,
 } from "@/lib/notify";
+import {
+  handleOauthCallbackIfPresent,
+  webCalendarSync,
+} from "@/adapters/webCalendarSync";
 
 interface ProgressViewProps {
   solutions: Solution[];
@@ -72,7 +80,121 @@ export function ProgressView({ solutions, checklist }: ProgressViewProps) {
       </div>
 
       <AlarmCard />
+      <CalendarSyncCard />
     </section>
+  );
+}
+
+/** Google Calendar 연동 — 학습 기록을 캘린더 이벤트로 동기화. */
+function CalendarSyncCard() {
+  const [conn, setConn] = useState<CalendarConnectStatus>("disconnected");
+  const [status, setStatus] = useState<string>("");
+  const [busy, setBusy] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      // 진입 시 OAuth 콜백이면 토큰 교환 → 연동 직후 1회 자동 sync.
+      const justConnected = await handleOauthCallbackIfPresent();
+      if (cancelled) return;
+      const s = await webCalendarSync.status();
+      if (cancelled) return;
+      setConn(s);
+      if (justConnected) {
+        setStatus("연동됐습니다. 최근 학습 기록을 동기화하는 중…");
+        try {
+          const since = new Date(
+            Date.now() - 14 * 24 * 60 * 60 * 1000,
+          ).toISOString();
+          const r = await webCalendarSync.sync({ since });
+          if (!cancelled) {
+            setStatus(`동기화 완료 · ${r.created}건 추가, ${r.skipped}건 기존.`);
+          }
+        } catch (e) {
+          if (!cancelled) setStatus(`동기화 실패: ${String(e)}`);
+        }
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const connect = async () => {
+    setBusy(true);
+    const r = await webCalendarSync.connect();
+    if (r === "unsupported") {
+      setStatus("Google Calendar 연동이 설정되지 않았습니다 (env 미설정).");
+      setBusy(false);
+    }
+    // connected 경로는 redirect라 여기 도달하지 않는다.
+  };
+
+  const syncNow = async () => {
+    setBusy(true);
+    setStatus("동기화 중…");
+    try {
+      const r = await webCalendarSync.sync();
+      setStatus(`동기화 완료 · ${r.created}건 추가, ${r.skipped}건 기존.`);
+    } catch (e) {
+      setStatus(`동기화 실패: ${String(e)}`);
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const disconnect = async () => {
+    await webCalendarSync.disconnect();
+    setConn("disconnected");
+    setStatus("연동을 해제했습니다.");
+  };
+
+  return (
+    <Card className="mt-5 p-6">
+      <h2 className="text-[19px] font-semibold tracking-[-0.3px]">
+        Google Calendar 연동
+      </h2>
+      <p className="mt-1 text-[14px] leading-relaxed text-ink-48">
+        언제 어떤 팩을 몇 문제 풀었는지 캘린더에 자동으로 기록합니다.
+      </p>
+
+      <div className="mt-4 flex items-center justify-between gap-3">
+        <div>
+          <p className="text-[15px] font-medium">
+            {conn === "unsupported"
+              ? "설정 필요"
+              : conn === "connected"
+                ? "연동됨"
+                : "연동 안 됨"}
+          </p>
+          <p className="text-[13px] text-ink-48">
+            {conn === "connected"
+              ? "학습 기록이 내 캘린더에 남습니다."
+              : "Google 계정으로 연동하세요."}
+          </p>
+        </div>
+        {conn === "connected" ? (
+          <div className="flex gap-2">
+            <Button variant="secondary" onClick={disconnect} disabled={busy}>
+              해제
+            </Button>
+            <Button variant="primary" onClick={syncNow} disabled={busy}>
+              지금 동기화
+            </Button>
+          </div>
+        ) : (
+          <Button
+            variant="primary"
+            onClick={connect}
+            disabled={busy || conn === "unsupported"}
+          >
+            연동하기
+          </Button>
+        )}
+      </div>
+
+      {status && <p className="mt-3 text-[13px] text-action">{status}</p>}
+    </Card>
   );
 }
 

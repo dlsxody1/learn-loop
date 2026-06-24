@@ -62,6 +62,22 @@ create table if not exists public.quiz_state (
   primary key (device_id, key)
 );
 
+-- ── OAuth 토큰(Google Calendar 연동) ───────────────────────
+-- ⚠️ 다른 테이블과 달리 anon/authenticated 접근을 완전히 차단한다.
+--    refresh_token 탈취 방지를 위해 service_role(Edge Function)만 접근.
+--    (RLS enable + 정책 없음 + GRANT 회수) 세 겹 차단. 토큰은 클라이언트로 절대 안 나간다.
+create table if not exists public.oauth_tokens (
+  device_id     text not null,
+  provider      text not null default 'google',
+  access_token  text not null,
+  refresh_token text not null,
+  expires_at    timestamptz not null,
+  scope         text not null,
+  token_type    text not null default 'Bearer',
+  updated_at    timestamptz not null default now(),
+  primary key (device_id, provider)
+);
+
 -- ── RLS (device_id 익명 접근, 위 주의사항 참고) ────────────
 alter table public.solutions        enable row level security;
 alter table public.checklist        enable row level security;
@@ -79,3 +95,9 @@ create policy "anon full access pack_completions" on public.pack_completions
   for all using (true) with check (true);
 create policy "anon full access quiz_state" on public.quiz_state
   for all using (true) with check (true);
+
+-- oauth_tokens는 service_role 전용: RLS는 켜되 정책을 만들지 않고,
+-- anon/authenticated GRANT는 회수, service_role에만 DML 부여.
+alter table public.oauth_tokens enable row level security;
+revoke all on public.oauth_tokens from anon, authenticated;
+grant select, insert, update, delete on public.oauth_tokens to service_role;

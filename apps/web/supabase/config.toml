@@ -1,0 +1,11 @@
+# LearnLoop Supabase 프로젝트 설정.
+# project_id는 원격 프로젝트 ref (supabase link / functions deploy 대상).
+project_id = "lojoiuizbkvftnlblxgk"
+
+[functions.google-oauth-exchange]
+# OAuth authorization code → access/refresh token 교환. client secret은 secrets로 주입.
+verify_jwt = false
+
+[functions.calendar-sync]
+# 학습 기록(quiz_attempts)을 Google Calendar 이벤트로 동기화.
+verify_jwt = false

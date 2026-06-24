@@ -27,10 +27,27 @@ export {
 } from "./lib/progress";
 export { buildAlarmIcs } from "./lib/ics";
 
+// 캘린더(Google Calendar 연동)
+export {
+  buildCalendarEvents,
+  CALENDAR_TZID,
+} from "./calendar/buildCalendarEvents";
+export type { StudyCalendarEvent } from "./calendar/buildCalendarEvents";
+export {
+  toGoogleEvent,
+  deterministicEventId,
+} from "./calendar/toGoogleEvent";
+export type { GoogleEventResource } from "./calendar/toGoogleEvent";
+
 // 어댑터 인터페이스 (플랫폼별 구현은 각 앱이 주입)
 export type { IdGen } from "./adapters/id";
 export type { KeyValueStore } from "./adapters/kv";
 export type { Notifier, NotifyPermission } from "./adapters/notifier";
+export type {
+  CalendarSync,
+  CalendarConnectStatus,
+  CalendarSyncResult,
+} from "./adapters/calendarSync";
 
 // 퀴즈 도메인
 export type { QuizRepo } from "./quiz/quizRepo";
